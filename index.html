@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QR Code Studio — Dr. Solution Tech</title>
+<meta name="description" content="Generate custom QR codes with brand logos, or scan and decode any QR code — free, in your browser, no install. Built by Dr. Solution Tech.">
+
+<meta name="theme-color" content="#080B12">
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20100%20100%22%3E%3Crect%20width=%22100%22%20height=%22100%22%20rx=%2222%22%20fill=%22%23080B12%22/%3E%3Crect%20x=%2222%22%20y=%2222%22%20width=%2222%22%20height=%2222%22%20fill=%22%23FF6B2C%22/%3E%3Crect%20x=%2256%22%20y=%2222%22%20width=%2222%22%20height=%2222%22%20fill=%22%23FF6B2C%22%20opacity=%220.4%22/%3E%3Crect%20x=%2222%22%20y=%2256%22%20width=%2222%22%20height=%2222%22%20fill=%22%23FF6B2C%22%20opacity=%220.4%22/%3E%3Crect%20x=%2260%22%20y=%2260%22%20width=%2214%22%20height=%2214%22%20fill=%22%23FF6B2C%22/%3E%3C/svg%3E">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="assets/css/style.css">
+
+<script src="https://unpkg.com/qr-code-styling@1.9.2/lib/qr-code-styling.js"></script>
+<script src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
+</head>
+<body>
+
+<div class="grain"></div>
+
+<header class="site-header">
+  <div class="wrap header-row">
+    <a class="brand" href="#top">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 28 28"><rect x="2" y="2" width="9" height="9" fill="currentColor"/><rect x="17" y="2" width="9" height="9" fill="currentColor" opacity="0.45"/><rect x="2" y="17" width="9" height="9" fill="currentColor" opacity="0.45"/><rect x="19" y="19" width="7" height="7" fill="currentColor"/></svg>
+      </span>
+      <span class="brand-text">
+        <strong>Dr. Solution Tech</strong>
+        <small>QR Code Studio</small>
+      </span>
+    </a>
+    <a class="header-link" href="https://github.com/SoLuTiOnExE" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M12 .5C5.73.5.5 5.74.5 12.02c0 5.03 3.26 9.29 7.79 10.8.57.1.78-.25.78-.55 0-.27-.01-1.16-.02-2.11-3.17.69-3.84-1.34-3.84-1.34-.52-1.31-1.27-1.67-1.27-1.67-1.04-.71.08-.69.08-.69 1.15.08 1.75 1.18 1.75 1.18 1.02 1.74 2.68 1.24 3.33.95.1-.74.4-1.24.72-1.53-2.53-.29-5.19-1.27-5.19-5.63 0-1.24.44-2.26 1.18-3.06-.12-.29-.51-1.46.11-3.04 0 0 .96-.31 3.15 1.17a10.9 10.9 0 0 1 5.74 0c2.19-1.48 3.15-1.17 3.15-1.17.62 1.58.23 2.75.11 3.04.74.8 1.18 1.82 1.18 3.06 0 4.37-2.66 5.33-5.2 5.62.41.36.77 1.07.77 2.15 0 1.55-.01 2.8-.01 3.18 0 .3.21.66.79.55A10.53 10.53 0 0 0 23.5 12 11.5 11.5 0 0 0 12 .5Z"/></svg>
+      <span>SoLuTiOnExE</span>
+    </a>
+  </div>
+</header>
+
+<main>
+
+  <section class="hero" id="top">
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <p class="eyebrow">FREE &middot; BROWSER-BASED &middot; NO SIGN-UP</p>
+        <h1>Make a QR code<br> that looks like <span class="accent">you.</span></h1>
+        <p class="hero-sub">Generate plain or logo-branded QR codes for links and text, or point your camera at any QR code to read it instantly. Everything runs right here in your browser — nothing is uploaded anywhere.</p>
+        <div class="hero-actions">
+          <a href="#studio" class="btn btn-primary">Open the studio ↓</a>
+          <a href="#contact" class="btn btn-ghost">Need a custom build?</a>
+        </div>
+      </div>
+      <div class="hero-visual" aria-hidden="true">
+        <div class="hero-frame">
+          <div class="corner tl"></div><div class="corner tr"></div>
+          <div class="corner bl"></div><div class="corner br"></div>
+          <div id="heroQr" class="hero-qr-canvas"></div>
+        </div>
+        <div class="scan-line"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="studio" id="studio">
+    <div class="wrap">
+
+      <div class="mode-switch" role="tablist" aria-label="Studio mode">
+        <button class="mode-btn is-active" id="tabGenerate" role="tab" aria-selected="true" aria-controls="panelGenerate">
+          <svg viewBox="0 0 24 24" width="16" height="16"><path fill="currentColor" d="M3 3h8v8H3V3Zm2 2v4h4V5H5Zm8-2h8v8h-8V3Zm2 2v4h4V5h-4ZM3 13h8v8H3v-8Zm2 2v4h4v-4H5Zm10-2h2v2h-2v-2Zm4 0h2v2h-2v-2Zm-4 4h2v2h-2v-2Zm4 0h2v4h-4v-2h2v-2Z"/></svg>
+          Generate
+        </button>
+        <button class="mode-btn" id="tabScan" role="tab" aria-selected="false" aria-controls="panelScan">
+          <svg viewBox="0 0 24 24" width="16" height="16"><path fill="currentColor" d="M4 4h5v2H6v3H4V4Zm11 0h5v5h-2V6h-3V4ZM4 15h2v3h3v2H4v-5Zm15 0h2v5h-5v-2h3v-3ZM4 11h16v2H4v-2Z"/></svg>
+          Scan &amp; Read
+        </button>
+      </div>
+
+      <!-- ===================== GENERATE PANEL ===================== -->
+      <div class="panel is-active" id="panelGenerate" role="tabpanel" aria-labelledby="tabGenerate">
+        <div class="studio-grid">
+
+          <div class="controls">
+
+            <div class="field-group">
+              <label class="field-label">What should the QR open?</label>
+              <div class="pill-toggle" id="dataTypeToggle">
+                <button class="pill is-active" data-type="link" type="button">Link / URL</button>
+                <button class="pill" data-type="text" type="button">Plain text</button>
+              </div>
+              <textarea id="dataInput" class="text-input" rows="2" placeholder="https://yourwebsite.com or wa.me/2348120729938">https://github.com/SoLuTiOnExE</textarea>
+              <p class="field-hint" id="dataHint">We'll add "https://" automatically if you leave it out.</p>
+            </div>
+
+            <div class="field-group">
+              <label class="field-label">Center icon</label>
+              <div class="logo-grid" id="logoGrid">
+                <button class="logo-chip is-active" data-logo="none" type="button">
+                  <span class="logo-chip-icon none-icon">∅</span>
+                  <span>None</span>
+                </button>
+                <button class="logo-chip" data-logo="instagram" data-color="E4405F" type="button">
+                  <img class="logo-chip-icon" alt="" />
+                  <span>Instagram</span>
+                </button>
+                <button class="logo-chip" data-logo="whatsapp" data-color="25D366" type="button">
+                  <img class="logo-chip-icon" alt="" />
+                  <span>WhatsApp</span>
+                </button>
+                <button class="logo-chip" data-logo="tiktok" data-color="000000" type="button">
+                  <img class="logo-chip-icon" alt="" />
+                  <span>TikTok</span>
+                </button>
+                <button class="logo-chip" data-logo="linkedin" data-color="0A66C2" type="button">
+                  <img class="logo-chip-icon" alt="" />
+                  <span>LinkedIn</span>
+                </button>
+                <button class="logo-chip" id="uploadChip" data-logo="custom" type="button">
+                  <span class="logo-chip-icon upload-icon">
+                    <svg viewBox="0 0 24 24" width="16" height="16"><path fill="currentColor" d="M12 3 7 8h3v6h4V8h3l-5-5ZM5 18v2h14v-2H5Z"/></svg>
+                  </span>
+                  <span>Upload</span>
+                </button>
+              </div>
+              <input type="file" id="logoUpload" accept="image/*" hidden>
+            </div>
+
+            <div class="field-group">
+              <label class="field-label">Style</label>
+              <div class="style-row">
+                <label class="mini-field">
+                  <span>Pattern</span>
+                  <select id="dotStyle">
+                    <option value="square">Square</option>
+                    <option value="dots">Dots</option>
+                    <option value="rounded">Rounded</option>
+                    <option value="classy" selected>Classy</option>
+                    <option value="classy-rounded">Classy round</option>
+                    <option value="extra-rounded">Extra round</option>
+                  </select>
+                </label>
+                <label class="mini-field">
+                  <span>Corners</span>
+                  <select id="cornerStyle">
+                    <option value="square">Square</option>
+                    <option value="dot">Dot</option>
+                    <option value="extra-rounded" selected>Rounded</option>
+                  </select>
+                </label>
+              </div>
+              <div class="style-row">
+                <label class="mini-field color-field">
+                  <span>Foreground</span>
+                  <input type="color" id="fgColor" value="#080B12">
+                </label>
+                <label class="mini-field color-field">
+                  <span>Background</span>
+                  <input type="color" id="bgColor" value="#FFFFFF">
+                </label>
+              </div>
+              <button class="text-btn" id="orangeAccent" type="button">Use brand orange (#FF6B2C) →</button>
+            </div>
+
+          </div>
+
+          <div class="preview-col">
+            <div class="qr-frame">
+              <div class="corner tl"></div><div class="corner tr"></div>
+              <div class="corner bl"></div><div class="corner br"></div>
+              <div id="qrPreview" class="qr-canvas"></div>
+            </div>
+            <div class="download-row">
+              <button class="btn btn-primary" id="downloadPng">Download PNG</button>
+              <button class="btn btn-outline" id="downloadSvg">Download SVG</button>
+            </div>
+            <p class="field-hint center-hint">Tip: keep foreground/background contrast high so phone cameras read it fast. Always test-scan before printing.</p>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ===================== SCAN PANEL ===================== -->
+      <div class="panel" id="panelScan" role="tabpanel" aria-labelledby="tabScan">
+        <div class="scan-grid">
+
+          <div class="scan-col">
+            <div class="dropzone" id="dropzone">
+              <svg viewBox="0 0 24 24" width="28" height="28"><path fill="currentColor" d="M12 3 7 8h3v6h4V8h3l-5-5ZM5 18v2h14v-2H5Z"/></svg>
+              <p><strong>Drop an image</strong> or click to upload</p>
+              <p class="field-hint">PNG, JPG — we'll decode any QR code found in it.</p>
+              <input type="file" id="scanFileInput" accept="image/*" hidden>
+            </div>
+
+            <button class="btn btn-outline full-width" id="cameraToggle">
+              <svg viewBox="0 0 24 24" width="16" height="16"><path fill="currentColor" d="M9 3 7.17 5H4a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-3.17L15 3H9Zm3 5a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6Z"/></svg>
+              Scan with camera
+            </button>
+            <div id="cameraReader" class="camera-reader"></div>
+            <div id="fileScanReader" style="display:none"></div>
+          </div>
+
+          <div class="scan-col">
+            <div class="result-card" id="resultCard">
+              <p class="result-label">Decoded result</p>
+              <p class="result-empty" id="resultEmpty">Nothing scanned yet — upload an image or use your camera.</p>
+              <div class="result-body" id="resultBody" hidden>
+                <pre id="resultText"></pre>
+                <div class="result-actions">
+                  <a id="resultOpen" class="btn btn-primary" target="_blank" rel="noopener" hidden>Open link</a>
+                  <button class="btn btn-outline" id="resultCopy">Copy</button>
+                  <button class="btn btn-ghost" id="resultClear">Clear</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer" id="contact">
+  <div class="wrap footer-grid">
+    <div class="footer-brand">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 28 28"><rect x="2" y="2" width="9" height="9" fill="currentColor"/><rect x="17" y="2" width="9" height="9" fill="currentColor" opacity="0.45"/><rect x="2" y="17" width="9" height="9" fill="currentColor" opacity="0.45"/><rect x="19" y="19" width="7" height="7" fill="currentColor"/></svg>
+      </span>
+      <div>
+        <strong>Dr. Solution Tech</strong>
+        <p>Web development &amp; business software — built around what your business actually needs.</p>
+      </div>
+    </div>
+
+    <div class="footer-links">
+      <p class="footer-heading">Build something with us</p>
+      <p class="footer-note">Got a project in mind? Reach out — we take on free starter builds and budget-friendly work too.</p>
+      <ul>
+        <li>
+          <svg viewBox="0 0 24 24" width="16" height="16"><path fill="currentColor" d="M22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6Zm-2 0-8 5-8-5h16Zm0 12H4V8l8 5 8-5v10Z"/></svg>
+          <a href="mailto:fasanyaayomide2019@gmail.com">fasanyaayomide2019@gmail.com</a>
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" width="16" height="16"><path fill="currentColor" d="M20.5 3.5A11.8 11.8 0 0 0 12.1 0C5.6 0 .3 5.3.3 11.8c0 2.1.5 4.1 1.6 5.9L0 24l6.5-1.7a11.8 11.8 0 0 0 5.6 1.4h.1c6.5 0 11.8-5.3 11.8-11.8 0-3.1-1.2-6.1-3.5-8.4Zm-8.4 18.1h-.1c-1.7 0-3.4-.5-4.9-1.3l-.4-.2-3.9 1 1-3.8-.2-.4a9.5 9.5 0 0 1-1.5-5.1c0-5.3 4.3-9.6 9.7-9.6 2.6 0 5 1 6.8 2.9a9.5 9.5 0 0 1 2.8 6.8c0 5.3-4.4 9.7-9.3 9.7Zm5.3-7.3c-.3-.1-1.7-.9-2-1-.3-.1-.5-.1-.6.1-.2.3-.7 1-.9 1.2-.2.2-.3.2-.6.1-.3-.1-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.4-.5c.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5-.1-.1-.6-1.5-.8-2-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.3.3-1 1-1 2.4s1 2.8 1.2 3c.1.2 2.1 3.2 5 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.7-.7 2-1.4.2-.7.2-1.2.1-1.4-.1-.1-.3-.2-.6-.3Z"/></svg>
+          <a href="https://wa.me/2348120729938" target="_blank" rel="noopener">+234 812 072 9938 (WhatsApp)</a>
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" width="16" height="16"><path fill="currentColor" d="M6.6 10.8c1.4 2.8 3.7 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.4 0 .8-.3 1L6.6 10.8Z"/></svg>
+          <a href="tel:+2348120729938">+234 812 072 9938 (Call)</a>
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" width="16" height="16"><path fill="currentColor" d="M12 .5C5.73.5.5 5.74.5 12.02c0 5.03 3.26 9.29 7.79 10.8.57.1.78-.25.78-.55 0-.27-.01-1.16-.02-2.11-3.17.69-3.84-1.34-3.84-1.34-.52-1.31-1.27-1.67-1.27-1.67-1.04-.71.08-.69.08-.69 1.15.08 1.75 1.18 1.75 1.18 1.02 1.74 2.68 1.24 3.33.95.1-.74.4-1.24.72-1.53-2.53-.29-5.19-1.27-5.19-5.63 0-1.24.44-2.26 1.18-3.06-.12-.29-.51-1.46.11-3.04 0 0 .96-.31 3.15 1.17a10.9 10.9 0 0 1 5.74 0c2.19-1.48 3.15-1.17 3.15-1.17.62 1.58.23 2.75.11 3.04.74.8 1.18 1.82 1.18 3.06 0 4.37-2.66 5.33-5.2 5.62.41.36.77 1.07.77 2.15 0 1.55-.01 2.8-.01 3.18 0 .3.21.66.79.55A10.53 10.53 0 0 0 23.5 12 11.5 11.5 0 0 0 12 .5Z"/></svg>
+          <a href="https://github.com/SoLuTiOnExE" target="_blank" rel="noopener">github.com/SoLuTiOnExE</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap footer-bottom">
+    <span>© <span id="year"></span> Dr. Solution Tech. Built with HTML, CSS &amp; JavaScript — runs entirely in your browser.</span>
+  </div>
+</footer>
+
+<script src="assets/js/app.js"></script>
+</body>
+</html>
