@@ -2,9 +2,9 @@
 
 A free, custom QR code generator and reader — built with plain **HTML, CSS, and JavaScript** so it runs entirely in the browser and deploys straight to **GitHub Pages**. A standalone **Python CLI** is included too, for generating or reading QR codes from your terminal.
 
-**Live demo:** once deployed, yours will be at `https://SoLuTiOnExE.github.io/<repo-name>/`
+**Live demo:** once deployed, yours will be at `https://drsolutiontech.github.io/QR-Code-Generator-/`
 
-Built by **Dr. Solution Tech** — [github.com/SoLuTiOnExE](https://github.com/SoLuTiOnExE)
+Built by **Dr. Solution Tech** — [Dr Solution Tech](https://github.com/drsolutiontech)
 
 ---
 
